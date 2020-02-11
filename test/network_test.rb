@@ -19,35 +19,45 @@ class NetworkTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of Network, nbc
+    assert_instance_of Network, @nbc
   end
+
+   def test_it_has_a_name
+     assert_equal "NBC", @nbc.name
+   end
 
   def test_it_starts_with_no_shows
     assert_equal [], @nbc.shows
   end
 
   def test_it_can_add_shows
-    nbc.add_show(knight_rider)
-    nbc.add_show(parks_and_rec)
+    @nbc.add_show(@knight_rider)
+    @nbc.add_show(@parks_and_rec)
 
-    assert_equal [@knight_rider, @parks_and_rec], nbc.shows
+    assert_equal [@knight_rider, @parks_and_rec], @nbc.shows
   end
 
  def test_it_can_list_characters
-
-   assert_equal [
+   @nbc.add_show(@knight_rider)
+   @nbc.add_show(@parks_and_rec)
+   expected = [
                 @michael_knight,
                 @kitt,
                 @leslie_knope,
                 @ron_swanson
-                ],  nbc.main_characters
+              ].sort {|a,b| a.name <=> b.name}
+
+   assert_equal expected,  @nbc.main_characters
  end
 
   def test_it_can_list_actors_by_show
+    @nbc.add_show(@knight_rider)
+    @nbc.add_show(@parks_and_rec)
+
     assert_equal ({
                   @knight_rider => ["David Hasselhoff", "William Daniels"],
                   @parks_and_rec => ["Amy Poehler", "Nick Offerman"]
-                }), nbc.actors_by_show
+                }), @nbc.actors_by_show
 
   end
 
