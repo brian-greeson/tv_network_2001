@@ -21,4 +21,10 @@ class Show
   def highest_paid_actor
     characters.max { |a, b| a.salary <=> b.salary }.actor
   end
+
+  def main_characters
+    characters.select { |character| character.salary > 500_000 &&
+                                    character.name.casecmp?(character.name.upcase)}
+  end
+
 end

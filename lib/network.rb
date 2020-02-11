@@ -14,8 +14,9 @@ class Network
   end
 
   def main_characters
+    # main character for the network if their salary is greater than 500_000 and their character name has no lowercase letters.
     show_characters = @shows.reduce([]) do |characters, show|
-      characters << show.characters
+      characters << show.main_characters
       characters
     end
     show_characters.flatten.sort {|a,b| a.name <=> b.name}
@@ -26,6 +27,18 @@ class Network
       show_actors[show] = show.actors
       show_actors
     end
+  end
+
+  def shows_by_actor
+    
+  end
+
+  def all_actors
+    actors = @shows.reduce([]) do |actors, show|
+      actors << show.actors
+      actors
+    end
+    actors.flatten.uniq
   end
 
 end
