@@ -30,7 +30,11 @@ class Network
   end
 
   def shows_by_actor
-    
+    all_actors.reduce({}) do |actors, actor| #<----------- ran out of time here :(
+      # require "pry"; binding.pry
+      actors[actor] = actors_by_show.select {|show| show.include?(actor)}
+    # actors[actor] << @shows.select {|show| show.actors.include?(actor)}
+    end
   end
 
   def all_actors
@@ -40,5 +44,6 @@ class Network
     end
     actors.flatten.uniq
   end
+
 
 end
